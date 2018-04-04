@@ -25,7 +25,7 @@ testEnt = {
 	objectJump = false,
 	objectMaxHeight = false,
 	update = function(object)
-		acceleration = 40
+		acceleration = 70
 		if (object:getNormalForce().y <= 0) then
 			acceleration = 15
 		end
