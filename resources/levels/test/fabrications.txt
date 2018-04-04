@@ -1,0 +1,85 @@
+obj serialized_items{
+    ols fabrications(4):[
+        obj tile{
+            dat xSize:64;
+            dat ySize:64;
+            dat xTexturePosition:0;
+            dat yTexturePosition:0;
+            dat id:tile1;
+            obj collider:collider{
+                dat eventOnCollision:0;
+                dat static:0;
+                dat enabled:1;
+                obj bound:aabb{
+                    dat globalPosX:0.000000;
+                    dat sizeX:64.000000;
+                    dat globalPosY:0.000000;
+                    dat sizeY:64.000000;
+                    dat localPosX:0.000000;
+                    dat localPosY:0.000000;
+                }
+            }
+        }
+        obj tile{
+            dat xSize:64;
+            dat ySize:64;
+            dat xTexturePosition:64;
+            dat yTexturePosition:0;
+            dat id:tile2;
+            obj collider:collider{
+                dat eventOnCollision:0;
+                dat static:0;
+                dat enabled:1;
+                obj bound:aabb{
+                    dat globalPosX:0.000000;
+                    dat sizeX:20.000000;
+                    dat globalPosY:0.000000;
+                    dat sizeY:20.000000;
+                    dat localPosX:0.000000;
+                    dat localPosY:0.000000;
+                }
+            }
+        }
+        obj tile{
+            dat xSize:64;
+            dat ySize:64;
+            dat xTexturePosition:64;
+            dat yTexturePosition:64;
+            dat id:tile3;
+            obj collider:collider{
+                dat eventOnCollision:0;
+                dat static:0;
+                dat enabled:1;
+                obj bound:aabb{
+                    dat globalPosX:0.000000;
+                    dat sizeX:20.000000;
+                    dat globalPosY:0.000000;
+                    dat sizeY:20.000000;
+                    dat localPosX:0.000000;
+                    dat localPosY:0.000000;
+                }
+            }
+        }
+        obj tile{
+            dat xSize:64;
+            dat ySize:64;
+            dat xTexturePosition:0;
+            dat yTexturePosition:64;
+            dat id:tile4;
+            obj collider:collider{
+                dat eventOnCollision:0;
+                dat static:0;
+                dat enabled:1;
+                obj bound:aabb{
+                    dat globalPosX:0.000000;
+                    dat sizeX:20.000000;
+                    dat globalPosY:0.000000;
+                    dat sizeY:20.000000;
+                    dat localPosX:0.000000;
+                    dat localPosY:0.000000;
+                }
+            }
+        }
+    ]
+}
+    

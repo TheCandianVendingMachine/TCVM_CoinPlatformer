@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<panel id="editor_mainPanel">
+    <size>
+        <x>SCREEN_SIZE_X</x>
+        <y>SCREEN_SIZE_Y</y>
+    </size>
+    <colour>
+        <body>
+            <a>0</a>
+        </body>
+    </colour>
+    <options>
+        <has_title>
+            <default_text>Level Editor</default_text>
+            <font>default</font>
+        </has_title>
+        <can_drag>0</can_drag>
+        <can_close>1</can_close>
+        <can_minimize>0</can_minimize>
+    </options>
+</panel>
+
+<panel id="editor_toolPanel">
+    <size>
+        <x>250</x>
+        <y>300</y>
+    </size>
+    <options>
+        <has_title>
+            <default_text>Tools</default_text>
+            <font>default</font>
+        </has_title>
+        <can_drag>1</can_drag>
+        <can_minimize>1</can_minimize>
+    </options>
+</panel>
+
+<panel id="editor_savePanel">
+    <size>
+        <x>250</x>
+        <y>200</y>
+    </size>
+    <options>
+        <has_title>
+            <default_text>Save</default_text>
+            <font>default</font>
+        </has_title>
+        <can_drag>1</can_drag>
+    </options>
+</panel>
+
+<panel id="editor_loadPanel">
+    <size>
+        <x>250</x>
+        <y>200</y>
+    </size>
+    <options>
+        <has_title>
+            <default_text>Load</default_text>
+            <font>default</font>
+        </has_title>
+        <can_drag>1</can_drag>
+    </options>
+</panel>
+
+<panel id="editor_tileSelectionPanel">
+    <size>
+        <x>300</x>
+        <y>300</y>
+    </size>
+    <options>
+        <has_title>
+            <default_text>Tile Selection</default_text>
+            <font>default</font>
+        </has_title>
+        <can_drag>1</can_drag>
+        <can_close>1</can_close>
+        <can_minimize>1</can_minimize>
+    </options>
+</panel>
+
+<panel id="editor_entityPlacePanel">
+    <size>
+        <x>300</x>
+        <y>300</y>
+    </size>
+    <options>
+        <has_title>
+            <default_text>Entity Place</default_text>
+            <font>default</font>
+        </has_title>
+        <can_drag>1</can_drag>
+        <can_close>1</can_close>
+        <can_minimize>1</can_minimize>
+    </options>
+</panel>
+
+<panel id="editor_textureLoadPanel">
+    <size>
+        <x>250</x>
+        <y>100</y>
+    </size>
+    <options>
+        <has_title>
+            <default_text>Load Texture</default_text>
+            <font>default</font>
+        </has_title>
+        <can_drag>1</can_drag>
+        <can_close>1</can_close>
+        <can_minimize>0</can_minimize>
+    </options>
+</panel>
+
+<panel id="editor_tileFabricationLoadPanel">
+    <size>
+        <x>250</x>
+        <y>100</y>
+    </size>
+    <options>
+        <has_title>
+            <default_text>Load Tile Fabrications</default_text>
+            <font>default</font>
+        </has_title>
+        <can_drag>1</can_drag>
+        <can_close>1</can_close>
+        <can_minimize>0</can_minimize>
+    </options>
+</panel>
+
+<element id = "editor_entitySelect">
+    <type>BUTTON</type>
+    <size>
+        <x>0</x>
+        <y>0</y>
+    </size>
+    <colour>
+        <active>
+            <r>255</r>
+            <g>0</g>
+            <b>20</b>
+            <a>255</a>
+        </active>
+        <inactive>
+            <r>255</r>
+            <g>0</g>
+            <b>20</b>
+            <a>200</a>
+        </inactive>
+    </colour>
+</element>
+
+<element id="editor_entityTypeLabel">
+    <type>LABEL</type>
+    <colour>
+        <active>
+            <r>255</r>
+            <g>255</g>
+            <b>255</b>
+            <a>0</a>
+        </active>
+    </colour>
+    <label>
+        <font>default</font>
+        <default_text>Default Text</default_text>      
+    </label>
+</element>
+
+<element id="editor_toolTileSelect">
+    <type>BUTTON</type>
+    <size>
+        <x>200</x>
+        <y>25</y>
+    </size>
+    <colour>
+        <active>
+            <r>255</r>
+            <g>0</g>
+            <b>20</b>
+            <a>255</a>
+        </active>
+        <inactive>
+            <r>255</r>
+            <g>0</g>
+            <b>20</b>
+            <a>200</a>
+        </inactive>
+    </colour>
+</element>
+
+<element id="editor_toolEntityPlace">
+    <type>BUTTON</type>
+    <size>
+        <x>200</x>
+        <y>25</y>
+    </size>
+    <colour>
+        <active>
+            <r>255</r>
+            <g>0</g>
+            <b>20</b>
+            <a>255</a>
+        </active>
+        <inactive>
+            <r>255</r>
+            <g>0</g>
+            <b>20</b>
+            <a>200</a>
+        </inactive>
+    </colour>
+</element>
+
+<element id="editor_toolTextureLoad">
+    <type>BUTTON</type>
+    <size>
+        <x>200</x>
+        <y>25</y>
+    </size>
+    <colour>
+        <active>
+            <r>255</r>
+            <g>0</g>
+            <b>20</b>
+            <a>255</a>
+        </active>
+        <inactive>
+            <r>255</r>
+            <g>0</g>
+            <b>20</b>
+            <a>200</a>
+        </inactive>
+    </colour>
+</element>
+
+<element id="editor_toolTileFabLoad">
+    <type>BUTTON</type>
+    <size>
+        <x>200</x>
+        <y>25</y>
+    </size>
+    <colour>
+        <active>
+            <r>255</r>
+            <g>0</g>
+            <b>20</b>
+            <a>255</a>
+        </active>
+        <inactive>
+            <r>255</r>
+            <g>0</g>
+            <b>20</b>
+            <a>200</a>
+        </inactive>
+    </colour>
+</element>
+
+<element id="editor_confirmButton">
+    <type>BUTTON</type>
+    <size>
+        <x>200</x>
+        <y>25</y>
+    </size>
+    <colour>
+        <active>
+            <r>255</r>
+            <g>0</g>
+            <b>20</b>
+            <a>255</a>
+        </active>
+        <inactive>
+            <r>255</r>
+            <g>0</g>
+            <b>20</b>
+            <a>200</a>
+        </inactive>
+    </colour>
+</element>
+
+<element id="editor_loadInput">
+    <type>TEXT_BOX</type>
+    <size>
+        <x>220</x>
+        <y>30</y>
+    </size>
+    <colour>
+        <active>
+            <r>255</r>
+            <g>255</g>
+            <b>255</b>
+            <a>255</a>
+        </active>
+        <inactive>
+            <r>255</r>
+            <g>255</g>
+            <b>200</b>
+            <a>200</a>
+        </inactive>
+    </colour>
+    <text_box>
+        <text_attributes>
+            <font>default</font>
+            <default_text>Load</default_text>
+        </text_attributes>
+        <options>
+            <enable_alphabet>1</enable_alphabet>
+            <enable_numerics>1</enable_numerics>
+            <enable_input>1</enable_input>
+            <delete_initial_text_on_input>1</delete_initial_text_on_input>
+        </options>
+        <text_string_size>-1</text_string_size>
+        <max_characters>-1</max_characters>
+        <padding>
+            <x>10</x>
+            <y>5</y>
+        </padding>      
+    </text_box>
+</element>
+
+<element id="editor_confirmLabel">
+    <type>LABEL</type>
+    <colour>
+        <active>
+            <r>255</r>
+            <g>255</g>
+            <b>255</b>
+            <a>255</a>
+        </active>
+    </colour>
+    <label>
+        <font>default</font>
+        <default_text>Confirm</default_text>      
+    </label>
+</element>
+
+<element id="editor_tileSelection">
+    <type>BUTTON</type>
+    <size>
+        <x>64</x>
+        <y>64</y>
+    </size>
+    <colour>
+        <active>
+            <r>255</r>
+            <g>255</g>
+            <b>255</b>
+            <a>255</a>
+        </active>
+        <inactive>
+            <r>255</r>
+            <g>255</g>
+            <b>255</b>
+            <a>200</a>
+        </inactive>
+    </colour>
+</element>
+
+<element id="editor_tileSelectionLabel">
+    <type>LABEL</type>
+    <colour>
+        <active>
+            <r>255</r>
+            <g>255</g>
+            <b>255</b>
+            <a>255</a>
+        </active>
+    </colour>
+    <label>
+        <font>default</font>
+        <default_text>Tile Selection</default_text>      
+    </label>
+</element>
+
+<element id="editor_entityPlaceLabel">
+    <type>LABEL</type>
+    <colour>
+        <active>
+            <r>255</r>
+            <g>255</g>
+            <b>255</b>
+            <a>255</a>
+        </active>
+    </colour>
+    <label>
+        <font>default</font>
+        <default_text>Entity Placement</default_text>      
+    </label>
+</element>
+
+<element id="editor_textureLoadLabel">
+    <type>LABEL</type>
+    <colour>
+        <active>
+            <r>255</r>
+            <g>255</g>
+            <b>255</b>
+            <a>255</a>
+        </active>
+    </colour>
+    <label>
+        <font>default</font>
+        <default_text>Load Texture</default_text>      
+    </label>
+</element>
+
+<element id="editor_tileFabLoadLabel">
+    <type>LABEL</type>
+    <colour>
+        <active>
+            <r>255</r>
+            <g>255</g>
+            <b>255</b>
+            <a>255</a>
+        </active>
+    </colour>
+    <label>
+        <font>default</font>
+        <default_text>Load Tile Fabrications</default_text>      
+    </label>
+</element>
+
+<element id="editor_mouseCoordRealString">
+    <type>LABEL</type>
+    <colour>
+        <active>
+            <r>255</r>
+            <g>255</g>
+            <b>255</b>
+            <a>255</a>
+        </active>
+    </colour>
+    <label>
+        <font>default</font>
+        <default_text>NULL REAL</default_text>
+        <size>24</size>
+    </label>
+</element>
+
+<element id="editor_mouseCoordGridString">
+    <type>LABEL</type>
+    <colour>
+        <active>
+            <r>255</r>
+            <g>255</g>
+            <b>255</b>
+            <a>255</a>
+        </active>
+    </colour>
+    <label>
+        <font>default</font>
+        <default_text>NULL GRID</default_text> 
+        <size>24</size>        
+    </label>
+</element>
+
+<element id="editor_gridSizeString">
+    <type>LABEL</type>
+    <colour>
+        <active>
+            <r>255</r>
+            <g>255</g>
+            <b>255</b>
+            <a>255</a>
+        </active>
+    </colour>
+    <label>
+        <font>default</font>
+        <default_text>NULL SIZE</default_text> 
+        <size>24</size>        
+    </label>
+</element>
+

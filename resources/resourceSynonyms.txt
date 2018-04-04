@@ -1,0 +1,16 @@
+START texture
+    .png
+    .jpg
+END
+
+START audio
+    .wav
+END
+
+START font
+    .ttf
+END
+
+START script
+    .lua
+END

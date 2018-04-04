@@ -1,0 +1,5 @@
+[resources]
+{resources/resourceSynonyms.txt}
+tilemap.png=            tilemap
+tilemap2.png=           tilemap2
+Roboto-Regular.ttf=     default
