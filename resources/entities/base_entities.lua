@@ -9,7 +9,7 @@ testEnt = {
         }
     },
 	rigidBody = {
-		maxSpeed = 200,
+		maxSpeed = 600,
 		friction = 3,
 		mass = 1
 	},
@@ -23,11 +23,12 @@ testEnt = {
 	objectTraveledAlt = 0,
 	oldAlt = 0,
 	objectJump = false,
+	hasJumped = false,
 	objectMaxHeight = false,
 	update = function(object)
-		acceleration = 70
+		acceleration = 270
 		if (object:getNormalForce().y <= 0) then
-			acceleration = 15
+			acceleration = 215
 		end
 		
 		if (isInputPressed(inputs.LShift)) then
@@ -35,9 +36,9 @@ testEnt = {
 		end
 
 		if (isInputPressed(inputs.S)) then
-			object:applyForce(0, acceleration)
+			object:applyForce(0, 1000)
 		elseif (isInputPressed(inputs.W)) then
-			object:applyForce(0, -acceleration)
+			object:applyForce(0, -1000)
 		end
 	
 		if (isInputPressed(inputs.D)) then
@@ -47,14 +48,15 @@ testEnt = {
 		end
 
 		if (isInputPressed(inputs.Space) and not testEnt["objectMaxHeight"]) then
-			baseForce = 50
+			baseForce = 350
 			-- force = ((currentH - maxH) * initF) / -maxH
 			appliedForce = ((testEnt["objectTraveledAlt"] - testEnt["maxHeight"]) * baseForce) / -testEnt["maxHeight"]
 			object:applyForce(0, -appliedForce)
-			print(appliedForce)
 		end
-		
-		if ((not isInputPressed(inputs.Space) and testEnt["objectJump"]) or (testEnt["objectJump"] and object:getForce().y > 0)) then
+
+		if ((not isInputPressed(inputs.Space) and testEnt["objectJump"]) or 
+			(testEnt["objectJump"] and object:getForce().y > 0) or 
+			(testEnt["objectTraveledAlt"] - testEnt["maxHeight"] > 0)) then
 			testEnt["objectMaxHeight"] = true
 		end
 		
@@ -66,16 +68,21 @@ testEnt = {
 			end
 		end
 		
-		if (object:getNormalForce().y > 0) then
+		if (object:getNormalForce().y > 0 and not testEnt["hasJumped"]) then
 			testEnt["objectJump"] = false
 			testEnt["objectTraveledAlt"] = 0
 		end
 		
-		if (isInputPressed(inputs.Space) and object:getNormalForce().y > 0) then
+		if (isInputPressed(inputs.Space) and object:getNormalForce().y > 0 and not testEnt["hasJumped"] and not testEnt["objectJump"]) then
 			testEnt["objectJump"] = true
 			testEnt["oldAlt"] = object:getPosition().y
 			testEnt["objectMaxHeight"] = false
-			object:applyForce(0, -5000)
+			testEnt["hasJumped"] = true
+			object:applyForce(0, -15000)
+		end
+		
+		if (not isInputPressed(inputs.Space) and testEnt["hasJumped"]) then
+			testEnt["hasJumped"] = false
 		end
 
 		setCameraPosition(object:getPosition().x, object:getPosition().y)
@@ -97,10 +104,34 @@ coin = {
 		solid = false,
 		on_collision = function(object, data)
 			object:destroy()
-		end
+		end,
+		size = {
+			x = 20,
+			y = 20
+		}
 	},
     size = {
         x = 16,
         y = 16,
+    }
+}
+
+world_exit = {
+	sceneGraph = {
+        renderType = "renderObject",
+        colour = {
+            r = 0,
+            g = 255,
+            b = 255,
+            a = 255
+        }
+    },
+	collisionBody = {
+		event_on_collision = "hit_exit",
+		solid = false
+	},
+    size = {
+        x = 30,
+        y = 64,
     }
 }

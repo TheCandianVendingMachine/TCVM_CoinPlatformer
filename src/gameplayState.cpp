@@ -27,14 +27,14 @@ void gameplayState::init()
 
         addPrefab("testEnt");
         addPrefab("coin");
+        addPrefab("world_exit");
 
         getGameWorld().load("level");
 
         fe::engine::get().getPhysicsEngine().setGravityZ(0.f);
-        fe::engine::get().getPhysicsEngine().setGravityY(25.f);
+        fe::engine::get().getPhysicsEngine().setGravityY(500.f);
         fe::engine::get().getPhysicsEngine().setGravityX(0.f);
-        fe::engine::get().getPhysicsEngine().setFrictionImpulse(10.f);
-        fe::engine::get().getEventSender().subscribe(this, FE_STR("hit"));
+        fe::engine::get().getPhysicsEngine().setFrictionImpulse(50.f);
     }
 
 void gameplayState::onActive()
