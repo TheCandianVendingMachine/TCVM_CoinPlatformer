@@ -44,6 +44,9 @@ void gameplayState::onActive()
         }, false, false));
 
         m_inputEnd = m_inputStart + 1;
+
+        m_scoreHandler.init();
+        m_scoreHandler.startLevel();
     }
 
 void gameplayState::onDeactive()
@@ -52,6 +55,8 @@ void gameplayState::onDeactive()
             {
                 fe::engine::get().getInputManager().remove(i);
             }
+
+        m_scoreHandler.deinit();
     }
 
 void gameplayState::preUpdate()
