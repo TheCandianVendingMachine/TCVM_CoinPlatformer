@@ -4,6 +4,7 @@
 #include <fe/subsystems/gameState/gameState.hpp>
 #include <fe/subsystems/messaging/eventHandler.hpp>
 #include "scoreHandler.hpp"
+#include "levelManager.hpp"
 
 class gameplayState : public fe::baseGameState, public fe::eventHandler
     {
@@ -12,6 +13,7 @@ class gameplayState : public fe::baseGameState, public fe::eventHandler
             fe::Handle m_inputEnd;
 
             scoreHandler m_scoreHandler;
+            levelManager m_levelManager;
             
         public:
             gameplayState();

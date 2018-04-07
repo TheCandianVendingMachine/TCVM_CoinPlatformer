@@ -14,7 +14,8 @@
 #include <SFML/Graphics/Image.hpp>
 #include <fe/subsystems/input/inputManager.hpp>
 
-gameplayState::gameplayState()
+gameplayState::gameplayState() :
+    m_levelManager(getGameWorld())
     {
         fe::engine::get().getEventSender().subscribe(this, fe::engineEvent::TILE_PLACED);
         fe::engine::get().getEventSender().subscribe(this, fe::engineEvent::TILE_REMOVED);
@@ -29,7 +30,8 @@ void gameplayState::init()
         addPrefab("coin");
         addPrefab("world_exit");
 
-        getGameWorld().load("level");
+        m_levelManager.addLevel("level");
+        m_levelManager.getLevel();
 
         fe::engine::get().getPhysicsEngine().setGravityZ(0.f);
         fe::engine::get().getPhysicsEngine().setGravityY(500.f);
@@ -47,6 +49,8 @@ void gameplayState::onActive()
 
         m_scoreHandler.init();
         m_scoreHandler.startLevel();
+
+        m_levelManager.init();
     }
 
 void gameplayState::onDeactive()
@@ -57,6 +61,7 @@ void gameplayState::onDeactive()
             }
 
         m_scoreHandler.deinit();
+        m_levelManager.deinit();
     }
 
 void gameplayState::preUpdate()
