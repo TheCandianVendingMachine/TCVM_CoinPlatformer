@@ -25,10 +25,10 @@ testEnt = {
 	objectJump = false,
 	hasJumped = false,
 	objectMaxHeight = false,
-	update = function(object)
-		acceleration = 270
+	fixedUpdate = function(object, deltaTime)
+		acceleration = 1070
 		if (object:getNormalForce().y <= 0) then
-			acceleration = 215
+			acceleration = 1015
 		end
 		
 		if (isInputPressed(inputs.LShift)) then
@@ -48,18 +48,27 @@ testEnt = {
 		end
 
 		if (isInputPressed(inputs.Space) and not testEnt["objectMaxHeight"]) then
-			baseForce = 350
+			baseForce = 550
 			-- force = ((currentH - maxH) * initF) / -maxH
 			appliedForce = ((testEnt["objectTraveledAlt"] - testEnt["maxHeight"]) * baseForce) / -testEnt["maxHeight"]
 			object:applyForce(0, -appliedForce)
 		end
 
+		if (isInputPressed(inputs.Space) and object:getNormalForce().y > 0 and not testEnt["hasJumped"] and not testEnt["objectJump"]) then
+			testEnt["objectJump"] = true
+			testEnt["oldAlt"] = object:getPosition().y
+			testEnt["objectMaxHeight"] = false
+			testEnt["hasJumped"] = true
+			object:applyForce(0, -25000)
+		end
+	end,
+	update = function(object)
 		if ((not isInputPressed(inputs.Space) and testEnt["objectJump"]) or 
 			(testEnt["objectJump"] and object:getForce().y > 0) or 
 			(testEnt["objectTraveledAlt"] - testEnt["maxHeight"] > 0)) then
 			testEnt["objectMaxHeight"] = true
 		end
-		
+	
 		if (testEnt["objectJump"]) then
 			travelAlt = testEnt["objectTraveledAlt"]
 			if (testEnt["oldAlt"] - object:getPosition().y >= 0) then
@@ -67,24 +76,16 @@ testEnt = {
 				testEnt["oldAlt"] = object:getPosition().y
 			end
 		end
-		
+	
 		if (object:getNormalForce().y > 0 and not testEnt["hasJumped"]) then
 			testEnt["objectJump"] = false
 			testEnt["objectTraveledAlt"] = 0
 		end
-		
-		if (isInputPressed(inputs.Space) and object:getNormalForce().y > 0 and not testEnt["hasJumped"] and not testEnt["objectJump"]) then
-			testEnt["objectJump"] = true
-			testEnt["oldAlt"] = object:getPosition().y
-			testEnt["objectMaxHeight"] = false
-			testEnt["hasJumped"] = true
-			object:applyForce(0, -15000)
-		end
-		
+	
 		if (not isInputPressed(inputs.Space) and testEnt["hasJumped"]) then
 			testEnt["hasJumped"] = false
 		end
-
+			
 		setCameraPosition(object:getPosition().x, object:getPosition().y)
 	end
 }
