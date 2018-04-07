@@ -4,6 +4,7 @@
 #include <fe/engine.hpp>
 #include <fe/objectManagement/str.hpp>
 #include <fe/subsystems/gameState/gameWorld.hpp>
+#include "gameEvents.hpp"
 
 levelManager::levelManager(fe::gameWorld &gameWorld) :
     m_gameWorld(gameWorld)
@@ -26,6 +27,7 @@ void levelManager::handleEvent(const fe::gameEvent &event)
             {
                 case FE_STR("hit_exit"):
                     getLevel();
+                    fe::engine::get().getEventSender().send(fe::gameEvent(), gameEvents::LEVEL_ENDED);
                     break;
                 default:
                     break;
@@ -47,6 +49,7 @@ void levelManager::getLevel()
         if (m_futureLevels.empty())
             {
                 m_gameWorld.load("");
+                fe::engine::get().getEventSender().send(fe::gameEvent(), gameEvents::ALL_LEVELS_ENDED);
                 return;
             }
         m_currentLevel = m_futureLevels.front();
