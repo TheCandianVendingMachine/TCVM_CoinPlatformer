@@ -101,10 +101,10 @@ void levelEditor::init()
         fe::engine::get().getInputManager().add(sf::Keyboard::Q, fe::input([this](const sf::Event&) { m_currentGridSize /= (m_currentGridSize != 1 ? 2 : 1); updateGrid(); }, false, false));
         fe::engine::get().getInputManager().add(sf::Keyboard::E, fe::input([this](const sf::Event&) { m_currentGridSize *= 2; updateGrid(); }, false, false));
 
-        fe::engine::get().getInputManager().add(sf::Keyboard::W, fe::input([this](const sf::Event&) { getCamera().setVelocity(getCamera().getVelocity().x, -50.f); }, true, false));
-        fe::engine::get().getInputManager().add(sf::Keyboard::A, fe::input([this](const sf::Event&) { getCamera().setVelocity(-50.f, getCamera().getVelocity().y); }, true, false));
-        fe::engine::get().getInputManager().add(sf::Keyboard::S, fe::input([this](const sf::Event&) { getCamera().setVelocity(getCamera().getVelocity().x, 50.f); }, true, false));
-        fe::engine::get().getInputManager().add(sf::Keyboard::D, fe::input([this](const sf::Event&) { getCamera().setVelocity(50.f, getCamera().getVelocity().y); }, true, false));
+        fe::engine::get().getInputManager().add(sf::Keyboard::W, fe::input([this](const sf::Event&) { getCamera().setVelocity(getCamera().getVelocity().x, -350.f); }, true, false));
+        fe::engine::get().getInputManager().add(sf::Keyboard::A, fe::input([this](const sf::Event&) { getCamera().setVelocity(-350.f, getCamera().getVelocity().y); }, true, false));
+        fe::engine::get().getInputManager().add(sf::Keyboard::S, fe::input([this](const sf::Event&) { getCamera().setVelocity(getCamera().getVelocity().x, 350.f); }, true, false));
+        fe::engine::get().getInputManager().add(sf::Keyboard::D, fe::input([this](const sf::Event&) { getCamera().setVelocity(350.f, getCamera().getVelocity().y); }, true, false));
 
         fe::engine::get().getInputManager().add(sf::Keyboard::W, fe::input([this](const sf::Event&) { getCamera().setVelocity(getCamera().getVelocity().x, 0.f); }, false, true));
         fe::engine::get().getInputManager().add(sf::Keyboard::A, fe::input([this](const sf::Event&) { getCamera().setVelocity(0.f, getCamera().getVelocity().y); }, false, true));

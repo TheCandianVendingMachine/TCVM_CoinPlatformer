@@ -1,4 +1,4 @@
-testEnt = {
+player = {
     sceneGraph = {
         renderType = "renderObject",
         colour = {
@@ -21,16 +21,16 @@ testEnt = {
     },
 	events = {
 		coin_collected = function()
-			testEnt["maxHeight"] = testEnt["maxHeight"] / 1.2
+			player["maxHeight"] = player["maxHeight"] * (5 / 8)
 		end
 	},
 	onAdd = function(object)
-		testEnt["maxHeight"] = 300
-		testEnt["objectTraveledAlt"] = 0
-		testEnt["oldAlt"] = 0
-		testEnt["objectJump"] = false
-		testEnt["hasJumped"] = false
-		testEnt["objectMaxHeight"] = false
+		player["maxHeight"] = 300
+		player["objectTraveledAlt"] = 0
+		player["oldAlt"] = 0
+		player["objectJump"] = false
+		player["hasJumped"] = false
+		player["objectMaxHeight"] = false
 	end,
 	fixedUpdate = function(object, deltaTime)
 		acceleration = 1070
@@ -38,59 +38,53 @@ testEnt = {
 			acceleration = 1015
 		end
 		
-		if (isInputPressed(inputs.LShift)) then
+		if (isInputPressed(inputs.Command)) then
 			acceleration = acceleration + acceleration * 0.2
 		end
 
-		if (isInputPressed(inputs.S)) then
-			object:applyForce(0, 1000)
-		elseif (isInputPressed(inputs.W)) then
-			object:applyForce(0, -1000)
-		end
-	
-		if (isInputPressed(inputs.D)) then
+		if (isInputPressed(inputs.Right)) then
 			object:applyForce(acceleration, 0)
-		elseif (isInputPressed(inputs.A)) then
+		elseif (isInputPressed(inputs.Left)) then
 			object:applyForce(-acceleration, 0)
 		end
 
-		if (isInputPressed(inputs.Space) and not testEnt["objectMaxHeight"]) then
+		if (isInputPressed(inputs.Period)) then
 			baseForce = 550
 			-- force = ((currentH - maxH) * initF) / -maxH
-			appliedForce = ((testEnt["objectTraveledAlt"] - testEnt["maxHeight"]) * baseForce) / -testEnt["maxHeight"]
+			appliedForce = ((player["objectTraveledAlt"] - player["maxHeight"]) * baseForce) / -player["maxHeight"]
 			object:applyForce(0, -appliedForce)
 		end
 
-		if (isInputPressed(inputs.Space) and object:getNormalForce().y > 0 and not testEnt["hasJumped"] and not testEnt["objectJump"]) then
-			testEnt["objectJump"] = true
-			testEnt["oldAlt"] = object:getPosition().y
-			testEnt["objectMaxHeight"] = false
-			testEnt["hasJumped"] = true
+		if (isInputPressed(inputs.Period) and object:getNormalForce().y > 0 and not player["hasJumped"] and not player["objectJump"]) then
+			player["objectJump"] = true
+			player["oldAlt"] = object:getPosition().y
+			player["objectMaxHeight"] = false
+			player["hasJumped"] = true
 			object:applyForce(0, -25000)
 		end
 	end,
 	update = function(object)
-		if ((not isInputPressed(inputs.Space) and testEnt["objectJump"]) or 
-			(testEnt["objectJump"] and object:getForce().y > 0) or 
-			(testEnt["objectTraveledAlt"] - testEnt["maxHeight"] > 0)) then
-			testEnt["objectMaxHeight"] = true
+		if ((not isInputPressed(inputs.Period) and player["objectJump"]) or 
+			(player["objectJump"] and object:getForce().y > 0) or 
+			(player["objectTraveledAlt"] - player["maxHeight"] > 0)) then
+			player["objectMaxHeight"] = true
 		end
 	
-		if (testEnt["objectJump"]) then
-			travelAlt = testEnt["objectTraveledAlt"]
-			if (testEnt["oldAlt"] - object:getPosition().y >= 0) then
-				testEnt["objectTraveledAlt"] = travelAlt + testEnt["oldAlt"] - object:getPosition().y
-				testEnt["oldAlt"] = object:getPosition().y
+		if (player["objectJump"]) then
+			travelAlt = player["objectTraveledAlt"]
+			if (player["oldAlt"] - object:getPosition().y >= 0) then
+				player["objectTraveledAlt"] = travelAlt + player["oldAlt"] - object:getPosition().y
+				player["oldAlt"] = object:getPosition().y
 			end
 		end
 	
-		if (object:getNormalForce().y > 0 and not testEnt["hasJumped"]) then
-			testEnt["objectJump"] = false
-			testEnt["objectTraveledAlt"] = 0
+		if (object:getNormalForce().y > 0 and not player["hasJumped"]) then
+			player["objectJump"] = false
+			player["objectTraveledAlt"] = 0
 		end
 	
-		if (not isInputPressed(inputs.Space) and testEnt["hasJumped"]) then
-			testEnt["hasJumped"] = false
+		if (not isInputPressed(inputs.Period) and player["hasJumped"]) then
+			player["hasJumped"] = false
 			object:applyForce(0, 7000)
 		end
 			

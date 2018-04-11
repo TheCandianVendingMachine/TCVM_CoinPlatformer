@@ -1,0 +1,85 @@
+obj serialized_items{
+    ols fabrications(4):[
+        obj tile{
+            dat xSize:64;
+            dat ySize:64;
+            dat xTexturePosition:0;
+            dat yTexturePosition:0;
+            dat id:grassSimple;
+            obj collider:collider{
+                dat eventOnCollision:0;
+                dat static:0;
+                dat enabled:1;
+                obj bound:aabb{
+                    dat globalPosX:0.000000;
+                    dat sizeX:64.000000;
+                    dat globalPosY:0.000000;
+                    dat sizeY:64.000000;
+                    dat localPosX:0.000000;
+                    dat localPosY:0.000000;
+                }
+            }
+        }
+		obj tile{
+            dat xSize:64;
+            dat ySize:64;
+            dat xTexturePosition:64;
+            dat yTexturePosition:0;
+            dat id:metalWall;
+            obj collider:collider{
+                dat eventOnCollision:0;
+                dat static:0;
+                dat enabled:1;
+                obj bound:aabb{
+                    dat globalPosX:0.000000;
+                    dat sizeX:64.000000;
+                    dat globalPosY:0.000000;
+                    dat sizeY:64.000000;
+                    dat localPosX:0.000000;
+                    dat localPosY:0.000000;
+                }
+            }
+        }
+		obj tile{
+            dat xSize:64;
+            dat ySize:64;
+            dat xTexturePosition:64;
+            dat yTexturePosition:64;
+            dat id:metalWallBottom;
+            obj collider:collider{
+                dat eventOnCollision:0;
+                dat static:0;
+                dat enabled:1;
+                obj bound:aabb{
+                    dat globalPosX:0.000000;
+                    dat sizeX:64.000000;
+                    dat globalPosY:0.000000;
+                    dat sizeY:64.000000;
+                    dat localPosX:0.000000;
+                    dat localPosY:0.000000;
+                }
+            }
+        }
+		obj tile{
+            dat xSize:64;
+            dat ySize:64;
+            dat xTexturePosition:0;
+            dat yTexturePosition:64;
+            dat id:metalWallDegraded;
+            obj collider:collider{
+                dat eventOnCollision:0;
+                dat static:0;
+                dat enabled:1;
+                obj bound:aabb{
+                    dat globalPosX:0.000000;
+                    dat sizeX:64.000000;
+                    dat globalPosY:0.000000;
+                    dat sizeY:64.000000;
+                    dat localPosX:0.000000;
+                    dat localPosY:0.000000;
+                }
+            }
+        }
+    ]
+}
+    
