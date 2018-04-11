@@ -26,12 +26,13 @@ void gameplayState::init()
         getGameWorld().setDynamicBroadphase(new fe::aabbTree);
         //getGameWorld().getDynamicBroadphase()->debugMode(true);
 
-        addPrefab("testEnt");
+        addPrefab("player");
         addPrefab("coin");
         addPrefab("world_exit");
 
-        m_levelManager.addLevel("level");
-        m_levelManager.addLevel("level2");
+        m_levelManager.addLevel("level00");
+        m_levelManager.addLevel("level01");
+        
         m_levelManager.getLevel();
 
         fe::engine::get().getPhysicsEngine().setGravityZ(0.f);
@@ -52,6 +53,9 @@ void gameplayState::onActive()
         m_scoreHandler.startLevel();
 
         m_levelManager.init();
+
+        fe::engine::get().getEventSender().subscribe(this, FE_STR("coin_collected"));
+        fe::engine::get().getEventSender().subscribe(this, FE_STR("revert_position"));
     }
 
 void gameplayState::onDeactive()
@@ -63,6 +67,9 @@ void gameplayState::onDeactive()
 
         m_scoreHandler.deinit();
         m_levelManager.deinit();
+
+        fe::engine::get().getEventSender().unsubscribe(this, FE_STR("coin_collected"));
+        fe::engine::get().getEventSender().unsubscribe(this, FE_STR("revert_position"));
     }
 
 void gameplayState::preUpdate()
@@ -80,6 +87,31 @@ void gameplayState::handleEvent(const fe::gameEvent &event)
                 case fe::engineEvent::TILE_REMOVED:
                     getGameWorld().getDynamicBroadphase()->remove(static_cast<fe::imp::tileWorld*>(event.args[0].arg.TYPE_VOIDP)->colliderPtr);
                     break;
+                case FE_STR("coin_collected"): 
+                    {   
+                        fe::collider *collider = static_cast<fe::collider*>(event.args[1].arg.TYPE_VOIDP);
+                        fe::collider *coin = static_cast<fe::collider*>(event.args[0].arg.TYPE_VOIDP);
+                        m_collectedPositions.push(std::make_pair(
+                            fe::Vector2d(collider->m_aabb.m_globalPositionX - 5.f, collider->m_aabb.m_globalPositionY - 5.f),
+                            fe::Vector2d(coin->m_aabb.m_globalPositionX, coin->m_aabb.m_globalPositionY))
+                        );
+                    }
+                    break;
+                case FE_STR("revert_position"):
+                    {
+                        if (m_collectedPositions.empty()) break;
+                        sol::object *solObj = static_cast<sol::object*>(event.args[0].arg.TYPE_VOIDP);
+                        fe::baseEntity *obj = solObj->as<fe::scriptObject*>()->getBaseEntity();
+                        obj->setPosition(m_collectedPositions.top().first);
+                        obj->getRigidBody()->setForce(0, 0);
+                        obj->getRigidBody()->setVelocity(0, 0);
+
+                        fe::Handle coin = addObject("coin");
+                        getObject(coin)->setPosition(m_collectedPositions.top().second);
+
+                        m_collectedPositions.pop();
+                    }
+                break;
                 default:
                     break;
             }

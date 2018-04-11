@@ -10,7 +10,7 @@ player = {
     },
 	rigidBody = {
 		maxSpeed = 600,
-		friction = 3,
+		friction = 10,
 		mass = 1
 	},
 	collisionBody = {
@@ -31,6 +31,7 @@ player = {
 		player["objectJump"] = false
 		player["hasJumped"] = false
 		player["objectMaxHeight"] = false
+		player["pressedR"] = false
 	end,
 	fixedUpdate = function(object, deltaTime)
 		acceleration = 1070
@@ -86,6 +87,14 @@ player = {
 		if (not isInputPressed(inputs.Period) and player["hasJumped"]) then
 			player["hasJumped"] = false
 			object:applyForce(0, 7000)
+		end
+			
+		if (isInputPressed(inputs.R) and not player["pressedR"]) then
+			player["pressedR"] = true
+		elseif (not isInputPressed(inputs.R) and player["pressedR"]) then
+			sendEvent("revert_position", object)
+			player["pressedR"] = false
+			print("abc")
 		end
 			
 		setCameraPosition(object:getPosition().x, object:getPosition().y)
