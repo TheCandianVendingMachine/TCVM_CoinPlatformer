@@ -31,6 +31,7 @@ void gameplayState::init()
         addPrefab("world_exit");
 
         m_levelManager.addLevel("level");
+        m_levelManager.addLevel("level2");
         m_levelManager.getLevel();
 
         fe::engine::get().getPhysicsEngine().setGravityZ(0.f);

@@ -19,12 +19,19 @@ testEnt = {
         x = 32,
         y = 32,
     },
-	maxHeight = 300,
-	objectTraveledAlt = 0,
-	oldAlt = 0,
-	objectJump = false,
-	hasJumped = false,
-	objectMaxHeight = false,
+	events = {
+		coin_collected = function()
+			testEnt["maxHeight"] = testEnt["maxHeight"] / 1.2
+		end
+	},
+	onAdd = function(object)
+		testEnt["maxHeight"] = 300
+		testEnt["objectTraveledAlt"] = 0
+		testEnt["oldAlt"] = 0
+		testEnt["objectJump"] = false
+		testEnt["hasJumped"] = false
+		testEnt["objectMaxHeight"] = false
+	end,
 	fixedUpdate = function(object, deltaTime)
 		acceleration = 1070
 		if (object:getNormalForce().y <= 0) then
@@ -84,6 +91,7 @@ testEnt = {
 	
 		if (not isInputPressed(inputs.Space) and testEnt["hasJumped"]) then
 			testEnt["hasJumped"] = false
+			object:applyForce(0, 7000)
 		end
 			
 		setCameraPosition(object:getPosition().x, object:getPosition().y)
