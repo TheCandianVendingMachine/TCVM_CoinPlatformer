@@ -13,6 +13,7 @@
 #include <SFML/Graphics/Texture.hpp>
 #include <SFML/Graphics/Image.hpp>
 #include <fe/subsystems/input/inputManager.hpp>
+#include "gameEvents.hpp"
 
 gameplayState::gameplayState() :
     m_levelManager(getGameWorld())
@@ -24,12 +25,13 @@ gameplayState::gameplayState() :
 void gameplayState::init()
     {
         getGameWorld().setDynamicBroadphase(new fe::aabbTree);
-        //getGameWorld().getDynamicBroadphase()->debugMode(true);
+        getGameWorld().getDynamicBroadphase()->debugMode(false);
 
         addPrefab("player");
         addPrefab("coin");
         addPrefab("world_exit");
 
+        //m_levelManager.addLevel("test");
         m_levelManager.addLevel("level00");
         m_levelManager.addLevel("level01");
         
@@ -56,6 +58,7 @@ void gameplayState::onActive()
 
         fe::engine::get().getEventSender().subscribe(this, FE_STR("coin_collected"));
         fe::engine::get().getEventSender().subscribe(this, FE_STR("revert_position"));
+        fe::engine::get().getEventSender().subscribe(this, gameEvents::LEVEL_ENDED);
     }
 
 void gameplayState::onDeactive()
@@ -74,7 +77,7 @@ void gameplayState::onDeactive()
 
 void gameplayState::preUpdate()
     {
-        int i = 0;
+        m_levelManager.update();
     }
 
 void gameplayState::handleEvent(const fe::gameEvent &event)
@@ -87,12 +90,19 @@ void gameplayState::handleEvent(const fe::gameEvent &event)
                 case fe::engineEvent::TILE_REMOVED:
                     getGameWorld().getDynamicBroadphase()->remove(static_cast<fe::imp::tileWorld*>(event.args[0].arg.TYPE_VOIDP)->colliderPtr);
                     break;
+                case gameEvents::LEVEL_ENDED:
+                    while (!m_collectedPositions.empty())
+                        {
+                            m_collectedPositions.pop();
+                        }
+                    break;
                 case FE_STR("coin_collected"): 
                     {   
                         fe::collider *collider = static_cast<fe::collider*>(event.args[1].arg.TYPE_VOIDP);
                         fe::collider *coin = static_cast<fe::collider*>(event.args[0].arg.TYPE_VOIDP);
+
                         m_collectedPositions.push(std::make_pair(
-                            fe::Vector2d(collider->m_aabb.m_globalPositionX - 5.f, collider->m_aabb.m_globalPositionY - 5.f),
+                            fe::Vector2d(coin->m_aabb.m_globalPositionX - (collider->m_aabb.m_sizeX) - 5.f, collider->m_aabb.m_globalPositionY - 5.f),
                             fe::Vector2d(coin->m_aabb.m_globalPositionX, coin->m_aabb.m_globalPositionY))
                         );
                     }

@@ -7,7 +7,8 @@
 #include "gameEvents.hpp"
 
 levelManager::levelManager(fe::gameWorld &gameWorld) :
-    m_gameWorld(gameWorld)
+    m_gameWorld(gameWorld),
+    m_newLevel(false)
     {
     }
 
@@ -21,13 +22,22 @@ void levelManager::deinit()
         fe::engine::get().getEventSender().unsubscribeAll(this);
     }
 
+void levelManager::update()
+    {
+        if (m_newLevel)
+            {
+                getLevel();
+                fe::engine::get().getEventSender().send(fe::gameEvent(), gameEvents::LEVEL_ENDED);
+                m_newLevel = false;
+            }
+    }
+
 void levelManager::handleEvent(const fe::gameEvent &event)
     {
         switch (event.eventType)
             {
                 case FE_STR("hit_exit"):
-                    getLevel();
-                    fe::engine::get().getEventSender().send(fe::gameEvent(), gameEvents::LEVEL_ENDED);
+                    m_newLevel = true;
                     break;
                 default:
                     break;

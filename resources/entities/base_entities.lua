@@ -94,7 +94,6 @@ player = {
 		elseif (not isInputPressed(inputs.R) and player["pressedR"]) then
 			sendEvent("revert_position", object)
 			player["pressedR"] = false
-			print("abc")
 		end
 			
 		setCameraPosition(object:getPosition().x, object:getPosition().y)

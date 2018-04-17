@@ -18,11 +18,15 @@ class levelManager : public fe::eventHandler
             std::queue<std::string> m_futureLevels;
             std::string m_currentLevel;
 
+            bool m_newLevel;
+
         public:
             levelManager(fe::gameWorld &gameWorld);
 
             void init();
             void deinit();
+
+            void update();
 
             void handleEvent(const fe::gameEvent &event);
 
