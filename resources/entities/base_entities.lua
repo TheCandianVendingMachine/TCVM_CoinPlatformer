@@ -22,6 +22,9 @@ player = {
 	events = {
 		coin_collected = function()
 			player["maxHeight"] = player["maxHeight"] * (5 / 8)
+		end,
+		coin_lost = function()
+			player["maxHeight"] = player["maxHeight"] / (5 / 8)
 		end
 	},
 	onAdd = function(object)

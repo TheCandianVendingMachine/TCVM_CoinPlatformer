@@ -120,6 +120,8 @@ void gameplayState::handleEvent(const fe::gameEvent &event)
                         getObject(coin)->setPosition(m_collectedPositions.top().second);
 
                         m_collectedPositions.pop();
+
+                        fe::engine::get().getEventSender().sendEngineEvent(fe::gameEvent(), FE_STR("coin_lost"));
                     }
                 break;
                 default:
